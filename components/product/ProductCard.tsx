@@ -148,7 +148,8 @@ export default function ProductCard({
           </p>
           <Link
             href={`/product/${product.id}`}
-            className="block text-xs sm:text-sm font-medium leading-snug line-clamp-2 min-h-[2.4rem] hover:text-[var(--gold)] transition-colors text-[var(--text-primary)]"
+            className="block text-xs sm:text-sm font-semibold leading-snug line-clamp-2 min-h-[2.4rem] hover:text-[var(--gold)] transition-colors text-[var(--text-primary)]"
+            style={{ fontFamily: "var(--font-sans)" }}
             title={product.name}
           >
             {product.name}

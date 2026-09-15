@@ -114,9 +114,9 @@ export default async function ProductDetailPage({ params }: Props) {
 
           {/* Product Title */}
           <h1
-            className="mb-3 text-2xl sm:text-3xl lg:text-4xl font-light text-[var(--text-primary)] leading-tight"
+            className="mb-3 text-2xl sm:text-3xl lg:text-4xl font-semibold text-[var(--text-primary)] leading-tight tracking-tight"
             style={{
-              fontFamily: "var(--font-serif)",
+              fontFamily: "var(--font-sans)",
             }}
           >
             {p.name}

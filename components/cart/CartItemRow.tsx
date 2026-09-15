@@ -96,7 +96,8 @@ export default function CartItemRow({ item, onUpdate }: CartItemRowProps) {
               </p>
               <Link
                 href={product ? `/product/${product.id}` : "#"}
-                className="text-xs sm:text-sm font-medium leading-snug line-clamp-1 hover:text-[var(--gold)] transition-colors text-[var(--text-primary)]"
+                className="text-xs sm:text-sm font-semibold leading-snug line-clamp-1 hover:text-[var(--gold)] transition-colors text-[var(--text-primary)]"
+                style={{ fontFamily: "var(--font-sans)" }}
               >
                 {product?.name ?? "Deleted product"}
               </Link>

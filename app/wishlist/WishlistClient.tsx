@@ -158,7 +158,8 @@ export default function WishlistClient({ initialItems }: WishlistClientProps) {
                 </div>
                 <Link
                   href={product ? `/product/${product.id}` : "#"}
-                  className="text-xs sm:text-sm font-medium text-[var(--text-primary)] line-clamp-2 hover:text-[var(--gold)] transition-colors mb-1.5 leading-snug"
+                  className="text-xs sm:text-sm font-semibold text-[var(--text-primary)] line-clamp-2 hover:text-[var(--gold)] transition-colors mb-1.5 leading-snug"
+                  style={{ fontFamily: "var(--font-sans)" }}
                 >
                   {product?.name ?? "Unavailable Product"}
                 </Link>

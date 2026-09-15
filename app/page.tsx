@@ -94,7 +94,10 @@ function ProductMiniCard({ product }: { product: ProductWithImages }) {
             <p className="text-[10px] sm:text-xs mb-0.5 text-[var(--text-muted)] font-mono uppercase tracking-wider">
               {product.code}
             </p>
-            <h3 className="text-xs sm:text-sm font-medium leading-snug mb-1 text-[var(--text-primary)] line-clamp-1 group-hover:text-[var(--gold)] transition-colors">
+            <h3
+              className="text-xs sm:text-sm font-semibold leading-snug mb-1 text-[var(--text-primary)] line-clamp-1 group-hover:text-[var(--gold)] transition-colors"
+              style={{ fontFamily: "var(--font-sans)" }}
+            >
               {product.name}
             </h3>
           </div>
