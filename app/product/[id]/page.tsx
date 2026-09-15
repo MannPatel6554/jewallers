@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
@@ -12,14 +13,19 @@ interface Props {
   params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { id } = await params;
+const getProduct = cache(async (id: string) => {
   const supabase = await createClient();
   const { data: product } = await supabase
     .from("products")
-    .select("name, description, product_images(*)")
+    .select("*, product_images(*), categories(*)")
     .eq("id", id)
     .single();
+  return product as (ProductWithImages & { categories: { name: string } | null }) | null;
+});
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { id } = await params;
+  const product = await getProduct(id);
 
   if (!product) {
     return { title: "Product Not Found" };
@@ -44,22 +50,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductDetailPage({ params }: Props) {
   const { id } = await params;
-  const supabase = await createClient();
-
-  const { data: product } = await supabase
-    .from("products")
-    .select("*, product_images(*), categories(*)")
-    .eq("id", id)
-    .single();
+  const product = await getProduct(id);
 
   if (!product) notFound();
 
-  const p = product as ProductWithImages & { categories: { name: string } | null };
+  const p = product;
+
   const sortedImages = [...(p.product_images ?? [])].sort(
     (a, b) => a.position - b.position
   );
 
   // Check if wishlisted
+  const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   let isWishlisted = false;
   if (user) {

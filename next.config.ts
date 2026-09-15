@@ -1,7 +1,15 @@
 import type { NextConfig } from "next";
+import dns from "node:dns";
+
+try {
+  dns.setDefaultResultOrder("ipv4first");
+} catch {
+  // Ignore in environments without node:dns
+}
 
 const nextConfig: NextConfig = {
   images: {
+    unoptimized: true,
     dangerouslyAllowLocalIP: true,
     remotePatterns: [
       {
@@ -25,3 +33,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+
